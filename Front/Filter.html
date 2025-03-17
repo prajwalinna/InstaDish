@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INSTADISH - Filter</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        min-height: 100vh;
+        background-color: #f8f9fa;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .dietary-section {
+        margin-bottom: 30px;
+      }
+
+      .section-title {
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #333;
+      }
+
+      .radio-group {
+        display: flex;
+        gap: 20px;
+      }
+
+      .radio-option {
+        display: flex;
+        align-items: center;
+      }
+
+      .radio-option input {
+        margin-right: 6px;
+      }
+
+      .filter-section {
+        margin-bottom: 15px;
+      }
+
+      .filter-label {
+        display: block;
+        font-weight: 500;
+        margin-bottom: 8px;
+        color: #555;
+        font-size: 14px;
+      }
+
+      .filter-select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 14px;
+        background-color: #f8f9fa;
+        appearance: none;
+      }
+
+      .filter-select:focus {
+        outline: none;
+        border-color: #aaa;
+      }
+
+      .apply-btn {
+        display: block;
+        width: 100%;
+        padding: 14px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 20px;
+      }
+
+      .apply-btn:hover {
+        background-color: #45a049;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 20px;
+        }
+
+        .radio-group {
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="logo">INSTADISH</div>
+      </div>
+
+      <div class="dietary-section">
+        <h3 class="section-title">Dietary</h3>
+        <div class="radio-group">
+          <div class="radio-option">
+            <input type="radio" id="veg" name="dietary" value="veg" />
+            <label for="veg">Veg</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="non-veg" name="dietary" value="non-veg" />
+            <label for="non-veg">Non-Veg</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="filters-container">
+        <div class="filter-section">
+          <label class="filter-label">1) Cuisine Type</label>
+          <select class="filter-select">
+            <option value="" disabled selected>Select cuisine</option>
+            <option value="indian">Indian</option>
+            <option value="italian">Italian</option>
+            <option value="chinese">Chinese</option>
+            <option value="mexican">Mexican</option>
+            <option value="thai">Thai</option>
+            <option value="mediterranean">Mediterranean</option>
+            <option value="american">American</option>
+            <option value="japanese">Japanese</option>
+          </select>
+        </div>
+
+        <div class="filter-section">
+          <label class="filter-label">2) Meal type</label>
+          <select class="filter-select">
+            <option value="" disabled selected>Select meal type</option>
+            <option value="breakfast">Breakfast</option>
+            <option value="lunch">Lunch</option>
+            <option value="dinner">Dinner</option>
+            <option value="snack">Snack</option>
+            <option value="dessert">Dessert</option>
+            <option value="beverage">Beverage</option>
+          </select>
+        </div>
+
+        <div class="filter-section">
+          <label class="filter-label">3) Cooking time</label>
+          <select class="filter-select">
+            <option value="" disabled selected>Select cooking time</option>
+            <option value="under15">Under 15 minutes</option>
+            <option value="15-30">15-30 minutes</option>
+            <option value="30-60">30-60 minutes</option>
+            <option value="over60">Over 60 minutes</option>
+          </select>
+        </div>
+
+        <div class="filter-section">
+          <label class="filter-label">4) Cooking method</label>
+          <select class="filter-select">
+            <option value="" disabled selected>Select cooking method</option>
+            <option value="baking">Baking</option>
+            <option value="grilling">Grilling</option>
+            <option value="frying">Frying</option>
+            <option value="boiling">Boiling</option>
+            <option value="steaming">Steaming</option>
+            <option value="slow-cooking">Slow Cooking</option>
+            <option value="pressure-cooking">Pressure Cooking</option>
+            <option value="air-frying">Air Frying</option>
+          </select>
+        </div>
+
+        <div class="filter-section">
+          <label class="filter-label">5) Nutrients filter</label>
+          <select class="filter-select">
+            <option value="" disabled selected>Select nutrients focus</option>
+            <option value="protein">High Protein</option>
+            <option value="fiber">High Fiber</option>
+            <option value="low-carb">Low Carb</option>
+            <option value="low-fat">Low Fat</option>
+            <option value="vitamin-rich">Vitamin Rich</option>
+            <option value="omega-3">Omega-3 Rich</option>
+          </select>
+        </div>
+
+        <div class="filter-section">
+          <label class="filter-label">6) Spicing level</label>
+          <select class="filter-select">
+            <option value="" disabled selected>Select spice level</option>
+            <option value="mild">Mild</option>
+            <option value="medium">Medium</option>
+            <option value="spicy">Spicy</option>
+            <option value="very-spicy">Very Spicy</option>
+          </select>
+        </div>
+
+        <div class="filter-section">
+          <label class="filter-label">7) Serving size</label>
+          <select class="filter-select">
+            <option value="" disabled selected>Select serving size</option>
+            <option value="1-2">1-2 people</option>
+            <option value="3-4">3-4 people</option>
+            <option value="5-6">5-6 people</option>
+            <option value="7+">7+ people</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="apply-btn">Apply Filters</button>
+    </div>
+  </body>
+</html>
