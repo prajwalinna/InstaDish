@@ -143,5 +143,115 @@
         <a href="SignIn.html"><div>Already a user? Sign In</div> </a>
       </div>
     </div>
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+      <div class="modal-content">
+        <h2>Signup Successful! 🎉</h2>
+        <p>Welcome to InstaDish! You can now explore amazing recipes.</p>
+        <button onclick="closeModal()">Continue</button>
+      </div>
+    </div>
+
+    <style>
+      /* Modal Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        animation: fadeIn 0.3s ease-in-out;
+      }
+
+      .modal-content h2 {
+        color: #4caf50;
+      }
+
+      .modal-content button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        border: none;
+        background-color: #4caf50;
+        color: white;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .modal-content button:hover {
+        background-color: #45a049;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    </style>
+    <script>
+      document
+        .querySelector("form")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault(); // Prevent default form submission
+
+          // Get form values
+          const name = document.querySelector(
+            'input[placeholder="Username"]'
+          ).value;
+          const email = document.querySelector(
+            'input[placeholder="Email"]'
+          ).value;
+          const password = document.querySelector(
+            'input[placeholder="Password"]'
+          ).value;
+
+          try {
+            // Send data to backend
+            const response = await fetch(
+              "http://localhost:5000/api/auth/signup",
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email, password }),
+              }
+            );
+
+            const data = await response.json();
+
+            if (response.ok) {
+              // Show the modal instead of an alert
+              document.getElementById("successModal").style.display = "flex";
+            } else {
+              alert("Signup Failed: " + data.message); // Show error if any
+            }
+          } catch (error) {
+            console.error("Signup Error:", error);
+            alert("An error occurred. Please try again.");
+          }
+        });
+
+      // Function to close modal and redirect to LandingPage.html
+      function closeModal() {
+        document.getElementById("successModal").style.display = "none";
+        window.location.href = "LandingPage.html"; // Redirect to LandingPage
+      }
+    </script>
   </body>
 </html>
