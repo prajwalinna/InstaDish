@@ -185,7 +185,7 @@
   <body>
     <div class="container">
       <div class="header">
-        <div class="logo">INSTADISH</div>
+        <div class="logo">INSTADISH - <span id="username"></span></div>
       </div>
 
       <div class="content">
@@ -193,10 +193,10 @@
           <a href="Filter.html"
             ><div class="sidebar-item active">Filter</div></a
           >
-         <a href="Recipe.html"><div class="sidebar-item">Add Recipe</div></a>
+          <a href="Recipe.html"><div class="sidebar-item">Add Recipe</div></a>
           <div class="sidebar-item">Blogs</div>
           <div class="sidebar-item">Report</div>
-          <div class="sidebar-item">Log Out</div>
+          <div class="sidebar-item" onclick="logout()">Log Out</div>
         </div>
 
         <div class="main-content">
@@ -232,5 +232,47 @@
         </div>
       </div>
     </div>
+    <script>
+      function checkAuth() {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          window.location.href = "SignIn.html";
+        }
+      }
+      checkAuth();
+      function logout() {
+        localStorage.removeItem("token");
+        window.location.href = "SignIn.html";
+      }
+      async function loadUserData() {
+        const token = localStorage.getItem("token");
+        if (!token) return;
+
+        try {
+          const response = await fetch(
+            "http://localhost:5000/api/user/profile",
+            {
+              headers: {
+                Authorization: "Bearer " + token,
+              },
+            }
+          );
+
+          if (!response.ok) {
+            logout();
+            return;
+          }
+
+          const userData = await response.json();
+          document.getElementById("username").innerText = userData.name;
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+          logout();
+        }
+      }
+
+      loadUserData();
+    </script>
   </body>
 </html>
