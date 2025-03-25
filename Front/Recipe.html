@@ -233,9 +233,47 @@
             <option value="7+">7+ people</option>
           </select>
         </div>
+        <form enctype="multipart/form-data">
+          <div class="form-group">
+            <label class="form-label">Previews</label>
+            <input
+              type="file"
+              id="poster"
+              name="poster[]"
+              accept="image/png, image/jpeg"
+              multiple
+            />
+          </div>
+        </form>
 
         <button type="submit" class="add-btn">ADD</button>
       </form>
     </div>
+    <script>
+      document
+        .getElementById("poster")
+        .addEventListener("change", function (event) {
+          let preview = document.getElementById("preview");
+          preview.innerHTML = ""; // Clear previous previews
+
+          let files = event.target.files; // Get selected files
+
+          for (let i = 0; i < files.length; i++) {
+            let reader = new FileReader();
+
+            reader.onload = function (e) {
+              let img = document.createElement("img");
+              img.src = e.target.result;
+              img.style.width = "100px"; // Set preview size
+              img.style.margin = "5px";
+              img.style.borderRadius = "5px";
+              img.style.boxShadow = "0 2px 5px rgba(0,0,0,0.2)";
+              preview.appendChild(img);
+            };
+
+            reader.readAsDataURL(files[i]); // Convert image to base64
+          }
+        });
+    </script>
   </body>
 </html>
